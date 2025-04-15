@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="weather-form">
+        <form method="POST">
+            <div class="form-group">
+                <input type="text" name="city" placeholder="Enter city name" required>
+                <button type="submit"><i class="fas fa-search"></i> Get Weather</button>
+            </div>
+        </form>
+    </div>
+
+    {% if error %}
+        <div class="error-message">
+            <p>{{ error }}</p>
+        </div>
+    {% endif %}
+
+    {% if weather %}
+        <div class="weather-card">
+            <div class="weather-header">
+                <h2>{{ weather.city }}, {{ weather.country }}</h2>
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="{{ weather.description }}">
+            </div>
+            
+            <div class="weather-details">
+                <div class="temperature">
+                    <span class="temp-value">{{ weather.temp }}</span>
+                    <span class="temp-unit">°C</span>
+                </div>
+                <p class="description">{{ weather.description }}</p>
+                
+                <div class="extra-info">
+                    <div class="info-item">
+                        <i class="fas fa-temperature-low"></i>
+                        <span>Feels like: {{ weather.feels_like }}°C</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-tint"></i>
+                        <span>Humidity: {{ weather.humidity }}%</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-wind"></i>
+                        <span>Wind: {{ weather.wind }} m/s</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
